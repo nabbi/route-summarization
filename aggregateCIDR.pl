@@ -6,10 +6,10 @@ use Net::CIDR::Lite;
 use Getopt::Long;
 
 GetOptions(
-    'spf'   => \my $spf,
-    'quiet' => \my $quiet,
+    's|spf'   => \my $spf,
+    'q|quiet' => \my $quiet,
     'help'  => \my $help
-);
+) or die "Error in command line arguments\n";
 
 if ($help) {
     print "usage: $0\n";
