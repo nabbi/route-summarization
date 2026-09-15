@@ -2,7 +2,7 @@
 
 A lightweight CIDR aggregation utility built in Perl using the [`Net::CIDR::Lite`](https://metacpan.org/dist/Net-CIDR-Lite/view/Lite.pm) module. This tool summarizes IPv4 and IPv6 prefixes from standard input and optionally formats output for SPF record usage.
 
-Inspired by the original concept described in [Random Thoughts](http://adrianpopagh.blogspot.com/2008/03/route-summarization-script.html).
+Inspired by the original concept described by Adrian Popa in [Random Thoughts](http://adrianpopagh.blogspot.com/2008/03/route-summarization-script.html); see [LICENSE](LICENSE) for how that attribution is handled.
 
 ---
 
@@ -21,14 +21,14 @@ Inspired by the original concept described in [Random Thoughts](http://adrianpop
 Run interactively:
 
 ```bash
-$ ./cidr-summarize.pl
-Enter IP/Mask one per line (1.2.3.0/24). End with CTRL+D.
+$ ./aggregateCIDR.pl
+# One IP/CIDR per line, e.g. 1.2.3.0/24 -- press CTRL+D when done.
 ```
 
 Or pipe a file into it:
 
 ```bash
-$ ./cidr-summarize.pl < cidr.txt
+$ ./aggregateCIDR.pl < cidr.txt
 ```
 
 ### Options
@@ -42,7 +42,7 @@ $ ./cidr-summarize.pl < cidr.txt
 Example with SPF mode:
 
 ```bash
-$ ./cidr-summarize.pl --spf < spf-list.txt
+$ ./aggregateCIDR.pl --spf < spf-list.txt
 ip4:203.0.113.0/24
 ip6:2001:db8::/48
 ```
@@ -99,6 +99,14 @@ Install module via CPAN:
 ```bash
 cpan install Net::CIDR::Lite
 ```
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE). The original blog post that inspired this
+script's control flow carries no license of its own; see the LICENSE file
+for how that's handled.
 
 ---
 

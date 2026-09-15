@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-# based on original from http://adrianpopagh.blogspot.com/2008/03/route-summarization-script.html
+# inspired by a script by Adrian Popa: http://adrianpopagh.blogspot.com/2008/03/route-summarization-script.html -- see LICENSE
 use strict;
 use warnings;
 use Net::CIDR::Lite;
@@ -16,14 +16,14 @@ if ($help) {
     print "\t-h|--help\tprint usage\n";
     print "\t-q|--quiet\tsuppress outputs\n";
     print "\t-s|--spf\tadd support for parsing spf prefixes\n";
-    print "\nThis script summarizes your IP classes (if possible).\n";
-    print "Input IPv4 or IPv6 with CIDR mask one per line. End with CTRL+D.\n\n";
-    print "Optionally, redirect a file to stdin like so:\n";
-    print "$0 < cidr.txt \n";
+    print "\nAggregates IPv4/IPv6 CIDR prefixes read from stdin into their minimal\n";
+    print "covering set, one prefix per line, terminated by CTRL+D.\n\n";
+    print "You can also pipe a file in instead of typing interactively, e.g.:\n";
+    print "\tcat cidr.txt | $0\n";
     exit;
 }
 
-if (!$quiet) { print "# Enter IP/Mask one per line (1.2.3.0/24). End with CTRL+D.\n"; }
+if (!$quiet) { print "# One IP/CIDR per line, e.g. 1.2.3.0/24 -- press CTRL+D when done.\n"; }
 
 my $cidr4 =Net::CIDR::Lite->new;
 my $cidr6 =Net::CIDR::Lite->new;
@@ -61,7 +61,7 @@ while (<>) {
 
 my @cidr4_list = $cidr4->list;
 my @cidr6_list = $cidr6->list;
-if (!$quiet) { print "# Aggregated IP list:\n"; }
+if (!$quiet) { print "# Summarized prefixes:\n"; }
 foreach my $item4(@cidr4_list){
     $item4 =~ s/\/32$//;
     if ($spf) { print "ip4:"; }
