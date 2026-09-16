@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 # inspired by a script by Adrian Popa: http://adrianpopagh.blogspot.com/2008/03/route-summarization-script.html -- see LICENSE
 use strict;
 use warnings;
