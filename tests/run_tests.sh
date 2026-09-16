@@ -46,4 +46,24 @@ else
     fail=1
 fi
 
+# Test 5: shebang uses portable `env perl` form
+shebang=$(head -1 "$SCRIPT")
+if [ "$shebang" = "#!/usr/bin/env perl" ]; then
+    echo "PASS: shebang uses env perl"
+else
+    echo "FAIL: expected '#!/usr/bin/env perl' shebang, got '$shebang'"
+    fail=1
+fi
+
+# Test 6: script is directly executable via its shebang (not invoked through `perl`)
+if [ ! -x "$SCRIPT" ]; then
+    echo "FAIL: $SCRIPT is not executable"
+    fail=1
+elif out=$(echo "10.0.0.0/24" | "$SCRIPT" --quiet 2>&1) && [ "$out" = "10.0.0.0/24" ]; then
+    echo "PASS: direct execution via env perl shebang works"
+else
+    echo "FAIL: direct execution failed or gave wrong output: $out"
+    fail=1
+fi
+
 exit $fail
