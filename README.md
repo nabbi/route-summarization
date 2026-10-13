@@ -1,5 +1,15 @@
 # CIDR Route Summarization
 
+> [!IMPORTANT]
+> **Migrate to [route-summarization-rs](https://github.com/nabbi/route-summarization-rs).**
+> `aggregate-cidr` is a Rust rewrite of this script with the same options, no
+> Perl or module dependencies, and this version's quirks fixed. It also adds
+> `--exclude` for removing addresses from the output. New deployments should
+> use it, and existing ones can switch with a symlink:
+> [Migrating from the Perl version](https://github.com/nabbi/route-summarization-rs/blob/master/docs/perl-differences.md#switching-over).
+> This script is kept for existing installs and as the fallback in the
+> projects below.
+
 A lightweight CIDR aggregation utility built in Perl using the [`Net::CIDR::Lite`](https://metacpan.org/dist/Net-CIDR-Lite/view/Lite.pm) module. This tool summarizes IPv4 and IPv6 prefixes from standard input and optionally formats output for SPF record usage.
 
 Inspired by the original concept described by Adrian Popa in [Random Thoughts](http://adrianpopagh.blogspot.com/2008/03/route-summarization-script.html); see [LICENSE](LICENSE) for how that attribution is handled.
@@ -85,6 +95,9 @@ Because this tool consumes input exclusively from STDIN, it embeds cleanly into 
 
 * **Postwhite Fork** — [https://github.com/nabbi/postwhite](https://github.com/nabbi/postwhite)
 * **TCL IPSet** — [https://github.com/nabbi/tcl-ipset](https://github.com/nabbi/tcl-ipset)
+
+Both now run `aggregate-cidr` when it is on `PATH` and fall back to this
+script, so installing the Rust version is all the migration they need.
 
 ---
 
